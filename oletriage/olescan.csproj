@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{49582EB4-306D-4B12-85B1-A977944B360C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>oletriage</RootNamespace>
-    <AssemblyName>oletriage</AssemblyName>
+    <RootNamespace>olescan</RootNamespace>
+    <AssemblyName>olescan</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

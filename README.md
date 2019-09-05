@@ -5,7 +5,7 @@ THIS IS A WORK IN PROGRESS - Check updates regularly!
 olescan is a lightweight wrapper aggregating the functionality of several tools
 to facilitate automated scanning of MS OLE2 and MS Office documents. The tool is
 not designed to cover advanced maldoc analysis but is to assist Level 1 Support Teams
-in performing basic code analysis before escalating to Level 2/3 Support Teams (i.e. InfoSec Professionals).
+in performing a preliminary analysis before escalating to Level 2/3 Support Teams (i.e. InfoSec Professionals).
 
 Its analysis capabilities include:
    1. Scanning of macro-enabled file-types and detection of macros, embedded flash content or
@@ -18,7 +18,7 @@ Its analysis capabilities include:
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 
 Usage: olescan [Options] \<filename>
-   
+   A lightweight wrapper aggregating the functionality of several tools to scan and detect malicious contents embedded within MS OLE2 and MS Office documents
 Options:
 
       -h, --help         show this help message and exit

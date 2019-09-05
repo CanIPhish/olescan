@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 
-namespace oletriage
+namespace olescan
 {
     class ContentDetection
     {
@@ -17,10 +17,13 @@ namespace oletriage
         public bool flashObjects;
         public string fullOutput;
 
+        //Core Method for detection of document contents through use of oleid
         public void DetectOLEContent(string fileName)
         {
+            //Close process when execution chain is finished
             using (Process process = new Process())
             {
+                //Call the oleid executable within the users environment variables with a parameter of file location and name
                 process.StartInfo.FileName = "oleid";
                 process.StartInfo.Arguments = '"' + fileName + '"';
                 process.StartInfo.UseShellExecute = false;
