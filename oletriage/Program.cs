@@ -39,13 +39,11 @@ namespace olescan
                     "2. Automatic code extraction, VBA stomping detection, decoding of common obfuscation \n" +
                     "   methods including Hex encoding, StrReverse, Base64, Dridex, VBA expressions, and \n" +
                     "   identification of IOCs from decoded strings (olvevba)\n" +
-                    "3. Scanning of both encoded and decoded strings against YARA rules(olevba + yara)\n" +
-                    "4. Scanning and detection of malicious VBA Macros using generic heuristics to check for \n" +
+                    "3. Scanning and detection of malicious VBA Macros using generic heuristics to check for \n" +
                     "   auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)\n" +
                     "\nUsage: olescan [Options] <filename>" +
                     "\nOptions:" +
                     "\n-h, --help         show this help message and exit" +
-                    "\n-r, --recurse      find files recursively in subdirectories" +
                     "\n-i, --input        input a delimited text file in-place of <filename> for scanning automation" +
                     "\n-o, --output       output scanning results into a delimited text file (e.g. -o \"C:\\results.csv\")" +
                     "\n-q, --quiet        simple analysis result of SUSPICIOUS or CLEAN" +

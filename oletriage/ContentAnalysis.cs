@@ -10,7 +10,8 @@ namespace olescan
 {
     class ContentAnalysis
     {
-        public string fullOutput;
+        public string fullolevbaOutput;
+        public string fullmraptorOutput;
         public string docType;
         public bool olevbaMacro;
         public bool olvevbaAutoExecutable;
@@ -46,8 +47,8 @@ namespace olescan
                 // Synchronously read the standard output of the spawned process. 
                 StreamReader reader = process.StandardOutput;
                 //Console.WriteLine(reader.ReadToEnd());
-                fullOutput = reader.ReadToEnd();
-                string[] output = fullOutput.Split(Environment.NewLine.ToCharArray());
+                fullmraptorOutput = reader.ReadToEnd();
+                string[] output = fullmraptorOutput.Split(Environment.NewLine.ToCharArray());
 
                 process.WaitForExit();
                 ParsemraptorOutput(output);
@@ -76,8 +77,8 @@ namespace olescan
 
                 // Synchronously read the standard output of the spawned process. 
                 StreamReader reader = process.StandardOutput;
-                fullOutput = reader.ReadToEnd();
-                string[] output = fullOutput.Split(Environment.NewLine.ToCharArray());
+                fullolevbaOutput = reader.ReadToEnd();
+                string[] output = fullolevbaOutput.Split(Environment.NewLine.ToCharArray());
 
                 process.WaitForExit();
                 ParseolevbaOutput(output);

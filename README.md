@@ -13,9 +13,10 @@ Its analysis capabilities include:
    2. Automatic code extraction, VBA stomping detection, decoding of common obfuscation
       methods including Hex encoding, StrReverse, Base64, Dridex, VBA expressions, and
       identification of IOCs from decoded strings (olvevba)
-   3. Scanning of both encoded and decoded strings against YARA rules(olevba + yara)
-   4. Scanning and detection of malicious VBA Macros using generic heuristics to check for
+   3. Scanning and detection of malicious VBA Macros using generic heuristics to check for
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
+
+Analysis Result: olescan will provide a suspicious rating between 0-100%
 
 Usage: olescan [Options] \<filename>
    A lightweight wrapper aggregating the functionality of several tools to scan and detect malicious contents embedded within MS OLE2 and MS Office documents
@@ -23,13 +24,11 @@ Options:
 
       -h, --help         show this help message and exit
 
-      -r, --recurse      find files recursively in subdirectories
-
       -i, --input        input a delimited text file in-place of <filename> for scanning automation
 
       -o, --output       output scanning results into a delimited text file (e.g. -o "C:\results.csv")
 
-      -q, --quiet        simple analysis result of SUSPICIOUS or CLEAN
+      -q, --quiet        simple analysis result of SUSPICIOUS rating or CLEAN
 
 
 Example Usage: olescan -q -i -o "C:\Results.csv" "C:\DocumentList.csv"
