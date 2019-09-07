@@ -22,12 +22,12 @@ namespace olescan
                     ContentAnalysis contentAnalysis = new ContentAnalysis();
                     contentAnalysis.ScanOLEContent(args[0],true);
                     SuspicionScoring suspicionScore = new SuspicionScoring();
-                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis));
+                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
                 }
             }
         }
 
-        static void HelpMessage()
+        private static void HelpMessage()
         {
             Console.WriteLine("olescan 0.01 - see https://github.com/Rices/olescan for updates " +
                     "\nTHIS IS A WORK IN PROGRESS - Check updates regularly! \n\n" +

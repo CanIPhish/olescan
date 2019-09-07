@@ -10,12 +10,12 @@ namespace olescan
 {
     class ContentDetection
     {
-        public bool oleFormat;
-        public string fileType;
-        public bool encrypted;
-        public bool vbaMacro;
-        public bool flashObjects;
-        public string fullOutput;
+        private bool oleFormat;
+        private string fileType;
+        private bool encrypted;
+        private bool vbaMacro;
+        private bool flashObjects;
+        private string fullOutput;
 
         //Core Method for detection of document contents through use of oleid
         public bool DetectOLEContent(string fileName)
@@ -42,7 +42,7 @@ namespace olescan
             }
         }
 
-        public void ParseoleidOutput(string[] oleidOutput)
+        private void ParseoleidOutput(string[] oleidOutput)
         {
             oleFormat = oleidOutput[12].Contains("True");
             if(oleFormat)

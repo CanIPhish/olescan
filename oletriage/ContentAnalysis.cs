@@ -10,19 +10,19 @@ namespace olescan
 {
     class ContentAnalysis
     {
-        public string fullolevbaOutput;
-        public string fullmraptorOutput;
-        public string docType;
-        public bool olevbaMacro;
-        public bool olevbaAutoExecutable;
-        public bool olevbaSuspiciousKeywords;
-        public bool olevbaIOCs;
-        public bool olevbaHexStrings;
-        public bool olevbaBase64Strings;
-        public bool olevbaDridexStrings;
-        public bool olevbaVbaStrings;
-        public bool mraptorSuspicious;
-        public string mraptorFlags;
+        internal string fullolevbaOutput;
+        internal string fullmraptorOutput;
+        internal string docType;
+        internal bool olevbaMacro;
+        internal bool olevbaAutoExecutable;
+        internal bool olevbaSuspiciousKeywords;
+        internal bool olevbaIOCs;
+        internal bool olevbaHexStrings;
+        internal bool olevbaBase64Strings;
+        internal bool olevbaDridexStrings;
+        internal bool olevbaVbaStrings;
+        internal bool mraptorSuspicious;
+        internal string mraptorFlags;
         
 
         public void ScanOLEContent(string fileName, bool triage)
@@ -31,7 +31,7 @@ namespace olescan
             MraptorScan(fileName);
         }
 
-        public void MraptorScan(string fileName)
+        private void MraptorScan(string fileName)
         {
             //Close process when execution chain is finished
             using (Process process = new Process())
@@ -55,13 +55,13 @@ namespace olescan
             }
         }
 
-        public void ParsemraptorOutput(string[] mraptorOutput)
+        private void ParsemraptorOutput(string[] mraptorOutput)
         {
             mraptorSuspicious = mraptorOutput[18].Contains("SUSPICIOUS");
             mraptorFlags = mraptorOutput[10].Substring(11, 3);
         }
 
-        public void OlevbaScan(string fileName, bool triage)
+        private void OlevbaScan(string fileName, bool triage)
         {
             //Close process when execution chain is finished
             using (Process process = new Process())
@@ -85,7 +85,7 @@ namespace olescan
             }
         }
 
-        public void ParseolevbaOutput(string[] olevbaOutput)
+        private void ParseolevbaOutput(string[] olevbaOutput)
         {
             docType = olevbaOutput[6].Substring(0, 3);
             olevbaMacro = !olevbaOutput[6].Substring(4, 1).Contains("-");
