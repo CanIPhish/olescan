@@ -10,9 +10,24 @@ namespace olescan
     {
         static void Main(string[] args)
         {
-            if (args.Length == 1)
+            if (args.Length == 0)
             {
-                Console.WriteLine("olescan 0.01 - see https://github.com/Rices/olescan for updates " +
+                HelpMessage();
+            }
+            else
+            {
+                ContentDetection contentDetection = new ContentDetection();
+                if(contentDetection.DetectOLEContent(args[0]))
+                {
+                    ContentAnalysis contentAnalysis = new ContentAnalysis();
+                    contentAnalysis.ScanOLEContent(args[0],true);
+                }
+            }
+        }
+
+        static void HelpMessage()
+        {
+            Console.WriteLine("olescan 0.01 - see https://github.com/Rices/olescan for updates " +
                     "\nTHIS IS A WORK IN PROGRESS - Check updates regularly! \n\n" +
                     "olescan is a lightweight wrapper aggregating the functionality of several tools \n" +
                     "to facilitate automated scanning of MS OLE2 and MS Office documents. The tool is \n" +
@@ -36,15 +51,7 @@ namespace olescan
                     "\n-q, --quiet        simple analysis result of SUSPICIOUS or CLEAN" +
                     "\n\n" +
                     "Example Usage: olescan -q -i -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
-            }
-            else
-            {
-
-                ContentDetection contentDetection = new ContentDetection();
-                string test = Console.ReadLine();
-                Console.WriteLine(test);
-                contentDetection.DetectOLEContent(test);
-            }
         }
+
     }
 }
