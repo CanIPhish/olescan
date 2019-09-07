@@ -14,9 +14,9 @@ namespace olescan
         public string fullmraptorOutput;
         public string docType;
         public bool olevbaMacro;
-        public bool olvevbaAutoExecutable;
+        public bool olevbaAutoExecutable;
         public bool olevbaSuspiciousKeywords;
-        public bool olvevbaIOCs;
+        public bool olevbaIOCs;
         public bool olevbaHexStrings;
         public bool olevbaBase64Strings;
         public bool olevbaDridexStrings;
@@ -89,9 +89,9 @@ namespace olescan
         {
             docType = olevbaOutput[6].Substring(0, 3);
             olevbaMacro = !olevbaOutput[6].Substring(4, 1).Contains("-");
-            olvevbaAutoExecutable = !olevbaOutput[6].Substring(5, 1).Contains("-");
+            olevbaAutoExecutable = !olevbaOutput[6].Substring(5, 1).Contains("-");
             olevbaSuspiciousKeywords = !olevbaOutput[6].Substring(6, 1).Contains("-");
-            olvevbaIOCs = !olevbaOutput[6].Substring(7, 1).Contains("-");
+            olevbaIOCs = !olevbaOutput[6].Substring(7, 1).Contains("-");
             olevbaHexStrings = !olevbaOutput[6].Substring(8, 1).Contains("-");
             olevbaBase64Strings = !olevbaOutput[6].Substring(9, 1).Contains("-");
             olevbaDridexStrings = !olevbaOutput[6].Substring(10, 1).Contains("-");

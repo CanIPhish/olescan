@@ -21,6 +21,8 @@ namespace olescan
                 {
                     ContentAnalysis contentAnalysis = new ContentAnalysis();
                     contentAnalysis.ScanOLEContent(args[0],true);
+                    SuspicionScoring suspicionScore = new SuspicionScoring();
+                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis));
                 }
             }
         }
