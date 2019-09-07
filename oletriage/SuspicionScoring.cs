@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace olescan
 {
-    class SuspicionScoring : ContentAnalysis
+    class SuspicionScoring
     {
         private double olevbaAutoExecutableScore = 0;
         private double olevbaSuspiciousKeywordsScore = 0;
