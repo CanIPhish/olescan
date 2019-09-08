@@ -19,11 +19,17 @@ It's analysis capabilities include:
 Analysis Result: olescan will provide a suspicious rating between 0-100%
 
 Key:
+
 0-24% - RARE
+
 25-49% - UNLIKELY
+
 50-74% - POSSIBLE
+
 75-89% - LIKELY
+
 90-100% - ALMOST CERTAIN
+
 
 It's my recommendation that anything above 24% be investigated further. Please see (https://github.com/decalage2/oletools) 
 and/or (https://github.com/decalage2/ViperMonkey) for extremely useful macro analysis tools.
