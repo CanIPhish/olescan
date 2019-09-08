@@ -21,14 +21,14 @@ namespace olescan
         {
             double suspicionScore;
 
-            if (cAnalysis.olevbaAutoExecutable) { olevbaAutoExecutableScore = 0.05; }
-            if (cAnalysis.olevbaSuspiciousKeywords) { olevbaSuspiciousKeywordsScore = 0.3; }
-            if (cAnalysis.olevbaIOCs) { olevbaIOCsScore = 0.3; }
+            if (cAnalysis.olevbaAutoExecutable) { olevbaAutoExecutableScore = 0.1; }
+            if (cAnalysis.olevbaSuspiciousKeywords) { olevbaSuspiciousKeywordsScore = 0.25; }
+            if (cAnalysis.olevbaIOCs) { olevbaIOCsScore = 0.25; }
             if (cAnalysis.olevbaHexStrings) { olevbaHexStringsScore = 0.15; }
             if (cAnalysis.olevbaBase64Strings) { olevbaBase64StringsScore = 0.15; }
             if (cAnalysis.olevbaDridexStrings) { olevbaDridexStringsScore = 0.15; }
             if (cAnalysis.olevbaVbaStrings) { olevbaVbaStringsScore = 0.15; }
-            if (cAnalysis.mraptorSuspicious) { mraptorSuspiciousScore = 0.5; }
+            if (cAnalysis.mraptorSuspicious) { mraptorSuspiciousScore = 0.4; }
 
             suspicionScore = olevbaAutoExecutableScore + olevbaSuspiciousKeywordsScore + olevbaIOCsScore + olevbaHexStringsScore 
                 + olevbaBase64StringsScore + olevbaDridexStringsScore + olevbaVbaStringsScore + mraptorSuspiciousScore;
