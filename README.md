@@ -20,31 +20,31 @@ Analysis Result: olescan will provide a suspicious rating between 0-100%
 
 Key:
 
-0-24% - RARE
+0-15% - RARE
 
-25-49% - UNLIKELY
+16-39% - UNLIKELY
 
-50-74% - POSSIBLE
+40-60% - POSSIBLE
 
-75-89% - LIKELY
+61-84% - LIKELY
 
-90-100% - ALMOST CERTAIN
+85-100% - ALMOST CERTAIN
 
 
-It's my recommendation that anything above 24% be investigated further. Please see (https://github.com/decalage2/oletools) 
-and/or (https://github.com/decalage2/ViperMonkey) for extremely useful macro analysis tools.
+It's my recommendation that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 
+and/or (https://github.com/decalage2/ViperMonkey) for extremely useful analysis tools.
 
 Usage: olescan [Options] \<filename>
 
 Options:
 
-      -h, --help         show this help message and exit
+      -h, --help         show help message and exit
 
-      -i, --input        input a delimited text file in-place of <filename> for scanning automation
+      -b, --batch        input a pipe delimited list in-place of <filename> for scanning automation
 
       -o, --output       output scanning results into a delimited text file (e.g. -o "C:\results.csv")
 
-      -q, --quiet        simple analysis result of SUSPICIOUS rating or CLEAN
+      -q, --quiet        output simple analysis result of SUSPICIOUS rating
 
 
-Example Usage: olescan -q -i -o "C:\Results.csv" "C:\DocumentList.csv"
+Example Usage: olescan -q -l -o "C:\Results.csv" "C:\DocumentList.csv"

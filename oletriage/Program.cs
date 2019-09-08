@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommandLine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,45 @@ namespace olescan
     {
         static void Main(string[] args)
         {
-            if (args.Length == 1)
+            if (args.Length == 0) { HelpMessage(); }
+            else
             {
-                HelpMessage();
+                string oleFile = args[args.Length - 1];
+                Parser.Default.ParseArguments<Options>(args)
+                   .WithParsed<Options>(o =>
+                   {
+                       if (o.help) { HelpMessage(); }
+                       else
+                       {
+                           if(o.batch != "") { BatchAnalysis(o.batch, o.quiet); }
+                           else { PerformAnalysis(oleFile, o.quiet); }
+                       }
+                   });
+            }
+        }
+
+        private static void BatchAnalysis (string batchFile, bool triage)
+        {
+            string[] files = new System.IO.StreamReader(batchFile).ReadToEnd().Split(new string[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries);
+            foreach (string file in files)
+            {
+                PerformAnalysis(file, triage);
+            }
+        }
+
+        private static void PerformAnalysis(string oleFile, bool triage)
+        {
+            ContentDetection contentDetection = new ContentDetection();
+            if (contentDetection.DetectOLEContent(oleFile))
+            {
+                ContentAnalysis contentAnalysis = new ContentAnalysis();
+                contentAnalysis.ScanOLEContent(oleFile, triage);
+                SuspicionScoring suspicionScore = new SuspicionScoring();
+                Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
             }
             else
             {
-                ContentDetection contentDetection = new ContentDetection();
-                if(contentDetection.DetectOLEContent(args[0]))
-                {
-                    ContentAnalysis contentAnalysis = new ContentAnalysis();
-                    contentAnalysis.ScanOLEContent(args[0],true);
-                    SuspicionScoring suspicionScore = new SuspicionScoring();
-                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
-                }
+                Console.WriteLine("No VBA Contents");
             }
         }
 
@@ -45,22 +71,22 @@ namespace olescan
                     "   auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)\n\n" +
                     "Analysis Result: olescan will provide a suspicious rating between 0 - 100 %\n\n" +
                     "Key:\n" +
-                    "0 - 24 % - RARE\n" +
-                    "25 - 49 % - UNLIKELY\n" +
-                    "50 - 74 % - POSSIBLE\n" +
-                    "75 - 89 % - LIKELY\n" +
-                    "90 - 100 % - ALMOST CERTAIN\n" +
-                    "It's my recommendation that anything above 24% be investigated further. Please see \n" +
+                    "0 - 15 % - RARE\n" +
+                    "16 - 39 % - UNLIKELY\n" +
+                    "40 - 60 % - POSSIBLE\n" +
+                    "61 - 84 % - LIKELY\n" +
+                    "85 - 100 % - ALMOST CERTAIN\n" +
+                    "It's my recommendation that anything above 15% be investigated further. Please see \n" +
                     "(https://github.com/decalage2/oletools) and/or (https://github.com/decalage2/ViperMonkey) \n" +
-                    "for extremely useful macro analysis tools.\n\n" +
+                    "for extremely useful analysis tools.\n\n" +
                     "\nUsage: olescan [Options] <filename>" +
                     "\nOptions:" +
-                    "\n-h, --help         show this help message and exit" +
-                    "\n-i, --input        input a delimited text file in-place of <filename> for scanning automation" +
-                    "\n-o, --output       output scanning results into a delimited text file (e.g. -o \"C:\\results.csv\")" +
-                    "\n-q, --quiet        simple analysis result of SUSPICIOUS or CLEAN" +
+                    "\n-h, --help         show help message and exit" +
+                    "\n-b, --batch        input a pipe delimited list in-place of <filename> for scanning automation" +
+                    "\n-o, --output       output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")" +
+                    "\n-q, --quiet        output simple analysis result of SUSPICIOUS rating" +
                     "\n\n" +
-                    "Example Usage: olescan -q -i -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
+                    "Example Usage: olescan -q -l -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
         }
 
     }

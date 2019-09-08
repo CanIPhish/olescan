@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CommandLine;
+
+namespace olescan
+{
+    class Options
+    {
+        // Omitting long name, defaults to name of property, ie "--verbose"
+        [Option('q', "quiet", Default = false, HelpText = "output simple analysis result of SUSPICIOUS rating")]
+        public bool quiet { get; set; }
+
+        [Option('o', "output", Default = false, HelpText = "output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")")]
+        public bool output { get; set; }
+
+        [Option('b', "batch", Default = "", HelpText = "input a pipe delimited list in-place of <filename> for scanning automation")]
+        public string batch { get; set; }
+
+        [Option('h', "help", Default = false, HelpText = "show help message and exit")]
+        public bool help { get; set; }
+    }
+}
