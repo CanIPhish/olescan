@@ -16,6 +16,9 @@ It's analysis capabilities include:
    3. Scanning and detection of malicious VBA Macros using generic heuristics to check for
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 
+Setup:
+Requires a Windows OS and installation of the oletools utility. Please see https://github.com/decalage2/oletools/wiki/Install (packaging of the install will occur shortly)
+
 Analysis Result: olescan will provide a suspicious rating between 0-100%
 
 Key:
@@ -31,7 +34,7 @@ Key:
 85-100% - ALMOST CERTAIN
 
 
-It's my recommendation that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 
+It's recommended that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 
 and/or (https://github.com/decalage2/ViperMonkey) for extremely useful analysis tools.
 
 Usage: olescan [Options] \<filename>
@@ -43,8 +46,6 @@ Options:
       -b, --batch        input a pipe delimited list in-place of <filename> for scanning automation
 
       -o, --output       output scanning results into a delimited text file (e.g. -o "C:\results.csv")
-
-      -q, --quiet        output simple analysis result of SUSPICIOUS rating
 
 
 Example Usage: olescan -q -l -o "C:\Results.csv" "C:\DocumentList.csv"

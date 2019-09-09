@@ -13,11 +13,11 @@ namespace olescan
         [Option('q', "quiet", Default = false, HelpText = "output simple analysis result of SUSPICIOUS rating")]
         public bool quiet { get; set; }
 
-        [Option('o', "output", Default = false, HelpText = "output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")")]
-        public bool output { get; set; }
+        [Option('o', "output", Default = "", HelpText = "output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")")]
+        public string output { get; set; }
 
-        [Option('b', "batch", Default = "", HelpText = "input a pipe delimited list in-place of <filename> for scanning automation")]
-        public string batch { get; set; }
+        [Option('b', "batch", Default = false, HelpText = "input a pipe delimited list in-place of <filename> for scanning automation")]
+        public bool batch { get; set; }
 
         [Option('h', "help", Default = false, HelpText = "show help message and exit")]
         public bool help { get; set; }

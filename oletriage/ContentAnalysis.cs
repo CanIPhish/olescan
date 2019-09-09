@@ -41,6 +41,7 @@ namespace olescan
                 string argument = '\"' + fileName + '"';
                 process.StartInfo.Arguments = argument;
                 process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
 
@@ -57,8 +58,16 @@ namespace olescan
 
         private void ParsemraptorOutput(string[] mraptorOutput)
         {
-            mraptorSuspicious = mraptorOutput[18].Contains("SUSPICIOUS");
-            mraptorFlags = mraptorOutput[10].Substring(11, 3);
+            if (mraptorOutput[18].Contains("can't concat str to bytes"))
+            {
+                mraptorSuspicious = true;
+                mraptorFlags = "ERROR";
+            }
+            else
+            {
+                mraptorSuspicious = mraptorOutput[18].Contains("SUSPICIOUS");
+                mraptorFlags = mraptorOutput[10].Substring(11, 3);
+            }
         }
 
         private void OlevbaScan(string fileName, bool triage)
