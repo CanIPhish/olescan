@@ -65,7 +65,7 @@ namespace olescan
             }
             else
             {
-                mraptorSuspicious = mraptorOutput[18].Contains("SUSPICIOUS");
+                mraptorSuspicious = mraptorOutput[10].Contains("SUSPICIOUS");
                 mraptorFlags = mraptorOutput[10].Substring(11, 3);
             }
         }

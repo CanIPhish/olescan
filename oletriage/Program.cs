@@ -48,55 +48,83 @@ namespace olescan
 
         private static void SaveOutput (ContentAnalysis cAnalysis)
         {
-            using (var sw = new StreamWriter(outFile))
+            bool outFileExists = File.Exists(outFile);
+            using (StreamWriter outWriter = new StreamWriter(outFile, true))
             {
-                var csvWriter = new CsvWriter(sw);
-                //Now we will write the data into the same output file but will do it 
-                //Using two methods.  The first is writing the entire record.  The second
-                //method writes individual fields.  Note you must call NextRecord method after 
-                //using Writefield to terminate the record.
-
-                //Note that WriteRecords will write a header record for you automatically.  If you 
-                //are not using the WriteRecords method and you want to a header, you must call the 
-                //Writeheader method like the following:
-                //
-                //writer.WriteHeader<DataRecord>();
-                //
-                //Do not use WriteHeader as WriteRecords will have done that already.
-                //csvWriter.WriteField(oleFile);
-                if(cAnalysis != null)
-                {
-                    csvWriter.WriteField(cAnalysis.docType);
-                    csvWriter.WriteField(cAnalysis.olevbaMacro);
-                    csvWriter.WriteField(cAnalysis.olevbaAutoExecutable);
-                    csvWriter.WriteField(cAnalysis.olevbaSuspiciousKeywords);
-                    csvWriter.WriteField(cAnalysis.olevbaIOCs);
-                    csvWriter.WriteField(cAnalysis.olevbaHexStrings);
-                    csvWriter.WriteField(cAnalysis.olevbaBase64Strings);
-                    csvWriter.WriteField(cAnalysis.olevbaDridexStrings);
-                    csvWriter.WriteField(cAnalysis.olevbaVbaStrings);
-                    csvWriter.WriteField(cAnalysis.mraptorFlags);
-                    csvWriter.WriteField(cAnalysis.mraptorSuspicious);
-                    csvWriter.WriteField(cAnalysis.docType);
-                    csvWriter.NextRecord();
+                if (!outFileExists) {
+                    outWriter.WriteLine("Document_Name Macro_Detected,Macro_AutoExec,Macro_Suspicious_Keywords,Macro_IOCs," +
+                    "Macro_Hex_Encoding,Macro_Base64_Encoding,Macro_Dridex_Encoding,Macro_VBAString_Encoding," +
+                    "Macro_mraptor_flags,Macro_mraptor_suspicious");
                 }
+                outWriter.Write(outFile + ",");
+                outWriter.Write(cAnalysis.olevbaMacro + ",");
+                outWriter.Write(cAnalysis.olevbaAutoExecutable + ",");
+                outWriter.Write(cAnalysis.olevbaSuspiciousKeywords + ",");
+                outWriter.Write(cAnalysis.olevbaIOCs + ",");
+                outWriter.Write(cAnalysis.olevbaHexStrings + ",");
+                outWriter.Write(cAnalysis.olevbaBase64Strings + ",");
+                outWriter.Write(cAnalysis.olevbaDridexStrings + ",");
+                outWriter.Write(cAnalysis.olevbaVbaStrings + ",");
+                outWriter.Write(cAnalysis.mraptorFlags + ",");
+                outWriter.WriteLine(cAnalysis.mraptorSuspicious);
             }
+
+            //using (var sw = new StreamWriter(outFile))
+            //{
+            //    var csvWriter = new CsvWriter(sw);
+            //    //Now we will write the data into the same output file but will do it 
+            //    //Using two methods.  The first is writing the entire record.  The second
+            //    //method writes individual fields.  Note you must call NextRecord method after 
+            //    //using Writefield to terminate the record.
+
+            //    //Note that WriteRecords will write a header record for you automatically.  If you 
+            //    //are not using the WriteRecords method and you want to a header, you must call the 
+            //    //Writeheader method like the following:
+            //    //
+            //    //writer.WriteHeader<DataRecord>();
+            //    //
+            //    //Do not use WriteHeader as WriteRecords will have done that already.
+            //    //csvWriter.WriteField(oleFile);
+            //    if (cAnalysis != null)
+            //    {
+            //        csvWriter.WriteField(cAnalysis.docType);
+            //        csvWriter.WriteField(cAnalysis.olevbaMacro);
+            //        csvWriter.WriteField(cAnalysis.olevbaAutoExecutable);
+            //        csvWriter.WriteField(cAnalysis.olevbaSuspiciousKeywords);
+            //        csvWriter.WriteField(cAnalysis.olevbaIOCs);
+            //        csvWriter.WriteField(cAnalysis.olevbaHexStrings);
+            //        csvWriter.WriteField(cAnalysis.olevbaBase64Strings);
+            //        csvWriter.WriteField(cAnalysis.olevbaDridexStrings);
+            //        csvWriter.WriteField(cAnalysis.olevbaVbaStrings);
+            //        csvWriter.WriteField(cAnalysis.mraptorFlags);
+            //        csvWriter.WriteField(cAnalysis.mraptorSuspicious);
+            //        csvWriter.WriteField(cAnalysis.docType);
+            //        csvWriter.NextRecord();
+            //    }
+            //}
         }
 
         private static void PerformAnalysis(string oleFile, bool triage)
         {
-            ContentDetection contentDetection = new ContentDetection();
-            if (contentDetection.DetectOLEContent(oleFile))
+            try
             {
-                ContentAnalysis contentAnalysis = new ContentAnalysis();
-                contentAnalysis.ScanOLEContent(oleFile, triage);
-                SuspicionScoring suspicionScore = new SuspicionScoring();
-                Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
-                if (outFile != "") { SaveOutput(contentAnalysis); }
+                ContentDetection contentDetection = new ContentDetection();
+                if (contentDetection.DetectOLEContent(oleFile))
+                {
+                    ContentAnalysis contentAnalysis = new ContentAnalysis();
+                    contentAnalysis.ScanOLEContent(oleFile, triage);
+                    SuspicionScoring suspicionScore = new SuspicionScoring();
+                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
+                    if (outFile != "") { SaveOutput(contentAnalysis); }
+                }
+                else
+                {
+                    Console.WriteLine("No VBA Contents");
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("No VBA Contents");
+                Console.WriteLine("An error occured scanning this file");
             }
         }
 
