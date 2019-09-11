@@ -33,7 +33,7 @@ namespace olescan
             suspicionScore = olevbaAutoExecutableScore + olevbaSuspiciousKeywordsScore + olevbaIOCsScore + olevbaHexStringsScore 
                 + olevbaBase64StringsScore + olevbaDridexStringsScore + olevbaVbaStringsScore + mraptorSuspiciousScore;
 
-            if (suspicionScore > 1) { suspicionScore = 1; }
+            if (suspicionScore > 1 || cAnalysis.errorFlag) { suspicionScore = 1; }
 
             return suspicionScore;
     }

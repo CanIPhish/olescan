@@ -10,8 +10,8 @@ namespace olescan
     class Options
     {
         // Omitting long name, defaults to name of property, ie "--verbose"
-        [Option('q', "quiet", Default = false, HelpText = "output simple analysis result of SUSPICIOUS rating")]
-        public bool quiet { get; set; }
+        [Option('v', "verbose", Default = false, HelpText = "output the verbose analysis to console")]
+        public bool verbose { get; set; }
 
         [Option('o', "output", Default = "", HelpText = "output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")")]
         public string output { get; set; }

@@ -11,7 +11,6 @@ namespace olescan
 {
     class Program
     {
-        private static string oleFile;
         private static string outFile;
 
         static void Main(string[] args)
@@ -19,7 +18,7 @@ namespace olescan
             if (args.Length == 0) { HelpMessage(); }
             else
             {
-                oleFile = args[args.Length - 1];
+                string oleFile = args[args.Length - 1];
                 Parser.Default.ParseArguments<Options>(args)
                    .WithParsed<Options>(o =>
                    {
@@ -27,36 +26,36 @@ namespace olescan
                        else
                        {
                            outFile = o.output;
-                           if(o.batch) { BatchAnalysis(oleFile, o.quiet); }
+                           if(o.batch) { BatchAnalysis(oleFile, o.verbose); }
                            else
                            {
-                               PerformAnalysis(oleFile, o.quiet);
+                               PerformAnalysis(oleFile, o.verbose);
                            }
                        }
                    });
             }
         }
 
-        private static void BatchAnalysis (string batchFile, bool triage)
+        private static void BatchAnalysis (string batchFile, bool verbose)
         {
             string[] files = new StreamReader(batchFile).ReadToEnd().Split(new string[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries);
             foreach (string file in files)
             {
-                PerformAnalysis(file, triage);
+                PerformAnalysis(file, verbose);
             }
         }
 
-        private static void SaveOutput (ContentAnalysis cAnalysis)
+        private static void SaveOutput (ContentAnalysis cAnalysis, string macroFile, string sScore)
         {
             bool outFileExists = File.Exists(outFile);
             using (StreamWriter outWriter = new StreamWriter(outFile, true))
             {
                 if (!outFileExists) {
-                    outWriter.WriteLine("Document_Name Macro_Detected,Macro_AutoExec,Macro_Suspicious_Keywords,Macro_IOCs," +
+                    outWriter.WriteLine("Document_Name,Macro_Detected,Macro_AutoExec,Macro_Suspicious_Keywords,Macro_IOCs," +
                     "Macro_Hex_Encoding,Macro_Base64_Encoding,Macro_Dridex_Encoding,Macro_VBAString_Encoding," +
-                    "Macro_mraptor_flags,Macro_mraptor_suspicious");
+                    "Macro_mraptor_flags,Macro_mraptor_suspicious,Error_Flag,Suspicion_Score");
                 }
-                outWriter.Write(outFile + ",");
+                outWriter.Write(macroFile + ",");
                 outWriter.Write(cAnalysis.olevbaMacro + ",");
                 outWriter.Write(cAnalysis.olevbaAutoExecutable + ",");
                 outWriter.Write(cAnalysis.olevbaSuspiciousKeywords + ",");
@@ -66,45 +65,13 @@ namespace olescan
                 outWriter.Write(cAnalysis.olevbaDridexStrings + ",");
                 outWriter.Write(cAnalysis.olevbaVbaStrings + ",");
                 outWriter.Write(cAnalysis.mraptorFlags + ",");
-                outWriter.WriteLine(cAnalysis.mraptorSuspicious);
+                outWriter.Write(cAnalysis.mraptorSuspicious + ",");
+                outWriter.Write(cAnalysis.errorFlag + ",");
+                outWriter.WriteLine(sScore);
             }
-
-            //using (var sw = new StreamWriter(outFile))
-            //{
-            //    var csvWriter = new CsvWriter(sw);
-            //    //Now we will write the data into the same output file but will do it 
-            //    //Using two methods.  The first is writing the entire record.  The second
-            //    //method writes individual fields.  Note you must call NextRecord method after 
-            //    //using Writefield to terminate the record.
-
-            //    //Note that WriteRecords will write a header record for you automatically.  If you 
-            //    //are not using the WriteRecords method and you want to a header, you must call the 
-            //    //Writeheader method like the following:
-            //    //
-            //    //writer.WriteHeader<DataRecord>();
-            //    //
-            //    //Do not use WriteHeader as WriteRecords will have done that already.
-            //    //csvWriter.WriteField(oleFile);
-            //    if (cAnalysis != null)
-            //    {
-            //        csvWriter.WriteField(cAnalysis.docType);
-            //        csvWriter.WriteField(cAnalysis.olevbaMacro);
-            //        csvWriter.WriteField(cAnalysis.olevbaAutoExecutable);
-            //        csvWriter.WriteField(cAnalysis.olevbaSuspiciousKeywords);
-            //        csvWriter.WriteField(cAnalysis.olevbaIOCs);
-            //        csvWriter.WriteField(cAnalysis.olevbaHexStrings);
-            //        csvWriter.WriteField(cAnalysis.olevbaBase64Strings);
-            //        csvWriter.WriteField(cAnalysis.olevbaDridexStrings);
-            //        csvWriter.WriteField(cAnalysis.olevbaVbaStrings);
-            //        csvWriter.WriteField(cAnalysis.mraptorFlags);
-            //        csvWriter.WriteField(cAnalysis.mraptorSuspicious);
-            //        csvWriter.WriteField(cAnalysis.docType);
-            //        csvWriter.NextRecord();
-            //    }
-            //}
         }
 
-        private static void PerformAnalysis(string oleFile, bool triage)
+        private static void PerformAnalysis(string oleFile, bool verbose)
         {
             try
             {
@@ -112,10 +79,18 @@ namespace olescan
                 if (contentDetection.DetectOLEContent(oleFile))
                 {
                     ContentAnalysis contentAnalysis = new ContentAnalysis();
-                    contentAnalysis.ScanOLEContent(oleFile, triage);
+                    contentAnalysis.ScanOLEContent(oleFile);
                     SuspicionScoring suspicionScore = new SuspicionScoring();
-                    Console.WriteLine("Suspicion Score: " + suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%"));
-                    if (outFile != "") { SaveOutput(contentAnalysis); }
+                    string sScore = suspicionScore.SuspicionAnalysis(contentAnalysis).ToString("#0.##%");
+                    if (verbose)
+                    {
+                        VerboseMessage(contentAnalysis, oleFile, sScore);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Scan Errors: " + contentAnalysis.errorFlag + "   Suspicion Score: " + sScore);
+                    }
+                    if (outFile != "") { SaveOutput(contentAnalysis, oleFile, sScore); }
                 }
                 else
                 {
@@ -126,6 +101,26 @@ namespace olescan
             {
                 Console.WriteLine("An error occured scanning this file");
             }
+        }
+
+        private static void VerboseMessage(ContentAnalysis contentAnalysis, string oleFile, string sScore)
+        {
+            Console.WriteLine("Document_Name,Macro_Detected,Macro_AutoExec,Macro_Suspicious_Keywords,Macro_IOCs," +
+                    "Macro_Hex_Encoding,Macro_Base64_Encoding,Macro_Dridex_Encoding,Macro_VBAString_Encoding," +
+                    "Macro_mraptor_flags,Macro_mraptor_suspicious,Error_Flag,Suspicion_Score");
+            Console.Write(oleFile + ",");
+            Console.Write(contentAnalysis.olevbaMacro + ",");
+            Console.Write(contentAnalysis.olevbaAutoExecutable + ",");
+            Console.Write(contentAnalysis.olevbaSuspiciousKeywords + ",");
+            Console.Write(contentAnalysis.olevbaIOCs + ",");
+            Console.Write(contentAnalysis.olevbaHexStrings + ",");
+            Console.Write(contentAnalysis.olevbaBase64Strings + ",");
+            Console.Write(contentAnalysis.olevbaDridexStrings + ",");
+            Console.Write(contentAnalysis.olevbaVbaStrings + ",");
+            Console.Write(contentAnalysis.mraptorFlags + ",");
+            Console.Write(contentAnalysis.mraptorSuspicious + ",");
+            Console.Write(contentAnalysis.errorFlag + ",");
+            Console.WriteLine(sScore);
         }
 
         private static void HelpMessage()
@@ -159,8 +154,9 @@ namespace olescan
                     "\n-h, --help         show help message and exit" +
                     "\n-b, --batch        input a pipe delimited list in-place of <filename> for scanning automation" +
                     "\n-o, --output       output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")" +
+                    "\n-v, --verbose      output the verbose analysis to console" +
                     "\n\n" +
-                    "Example Usage: olescan -q -l -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
+                    "Example Usage: olescan -q -b -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
         }
 
     }
