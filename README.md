@@ -22,15 +22,15 @@ Analysis Result: olescan will provide a suspicion rating between 0-100%
 
 Key:
 
-		0-15% - RARE
+	0-15% - RARE
 
-		16-39% - UNLIKELY
+	16-39% - UNLIKELY
 
-		40-60% - POSSIBLE
+	40-60% - POSSIBLE
 
-		61-84% - LIKELY
+	61-84% - LIKELY
 
-		85-100% - ALMOST CERTAIN
+	85-100% - ALMOST CERTAIN
 
 
 It's recommended that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 
