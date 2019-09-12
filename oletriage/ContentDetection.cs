@@ -52,10 +52,6 @@ namespace olescan
                 vbaMacro = oleidOutput[22].Contains("True");
                 flashObjects = !oleidOutput[32].Contains("0");
             }
-            //foreach (string contentString in oleidOutput)
-            //{
-            //    Console.WriteLine(contentString);
-            //}
         }
 
     }

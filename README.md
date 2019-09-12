@@ -1,7 +1,5 @@
 # olescan
 
-THIS IS A WORK IN PROGRESS - Check updates regularly!
-
 olescan is a lightweight wrapper aggregating the functionality of several oletools
 to facilitate automated scanning of MS OLE2 and MS Office documents. The tool is
 not designed to cover advanced maldoc analysis but is to assist Level 1 Support Teams
@@ -17,21 +15,22 @@ It's analysis capabilities include:
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 
 Setup:
-Requires a Windows OS and installation of the oletools utility. Please see https://github.com/decalage2/oletools/wiki/Install (packaging of the install will occur shortly)
+Requires a Windows OS and installation of the oletools utility. Please see https://github.com/decalage2/oletools/wiki/Install. 
+Tested on Windows 10 using olevba 0.54.2/0.55.dev3 on Python 3.7.4
 
-Analysis Result: olescan will provide a suspicious rating between 0-100%
+Analysis Result: olescan will provide a suspicion rating between 0-100%
 
 Key:
 
-0-15% - RARE
+		0-15% - RARE
 
-16-39% - UNLIKELY
+		16-39% - UNLIKELY
 
-40-60% - POSSIBLE
+		40-60% - POSSIBLE
 
-61-84% - LIKELY
+		61-84% - LIKELY
 
-85-100% - ALMOST CERTAIN
+		85-100% - ALMOST CERTAIN
 
 
 It's recommended that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 

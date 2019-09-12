@@ -125,8 +125,7 @@ namespace olescan
 
         private static void HelpMessage()
         {
-            Console.WriteLine("olescan 0.01 - see https://github.com/Rices/olescan for updates " +
-                    "\nTHIS IS A WORK IN PROGRESS - Check updates regularly! \n\n" +
+            Console.WriteLine("olescan 0.01 - see https://github.com/Rices/olescan for updates \n\n" +
                     "olescan is a lightweight wrapper aggregating the functionality of several oletools \n" +
                     "to facilitate automated scanning of MS OLE2 and MS Office documents. The tool is \n" +
                     "not designed to cover advanced maldoc analysis but is to assist Level 1 Support Teams \n" +
@@ -139,7 +138,7 @@ namespace olescan
                     "   identification of IOCs from decoded strings (olvevba)\n" +
                     "3. Scanning and detection of malicious VBA Macros using generic heuristics to check for \n" +
                     "   auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)\n\n" +
-                    "Analysis Result: olescan will provide a suspicious rating between 0 - 100 %\n\n" +
+                    "Analysis Result: olescan will provide a suspicion rating between 0 - 100 %\n\n" +
                     "Key:\n" +
                     "0 - 15 % - RARE\n" +
                     "16 - 39 % - UNLIKELY\n" +
