@@ -105,22 +105,13 @@ namespace olescan
 
         private static void VerboseMessage(ContentAnalysis contentAnalysis, string oleFile, string sScore)
         {
-            Console.WriteLine("Document_Name,Macro_Detected,Macro_AutoExec,Macro_Suspicious_Keywords,Macro_IOCs," +
-                    "Macro_Hex_Encoding,Macro_Base64_Encoding,Macro_Dridex_Encoding,Macro_VBAString_Encoding," +
-                    "Macro_mraptor_flags,Macro_mraptor_suspicious,Error_Flag,Suspicion_Score");
-            Console.Write(oleFile + ",");
-            Console.Write(contentAnalysis.olevbaMacro + ",");
-            Console.Write(contentAnalysis.olevbaAutoExecutable + ",");
-            Console.Write(contentAnalysis.olevbaSuspiciousKeywords + ",");
-            Console.Write(contentAnalysis.olevbaIOCs + ",");
-            Console.Write(contentAnalysis.olevbaHexStrings + ",");
-            Console.Write(contentAnalysis.olevbaBase64Strings + ",");
-            Console.Write(contentAnalysis.olevbaDridexStrings + ",");
-            Console.Write(contentAnalysis.olevbaVbaStrings + ",");
-            Console.Write(contentAnalysis.mraptorFlags + ",");
-            Console.Write(contentAnalysis.mraptorSuspicious + ",");
-            Console.Write(contentAnalysis.errorFlag + ",");
-            Console.WriteLine(sScore);
+            Console.WriteLine("Suspicion Score: " + sScore);
+            Console.WriteLine("\n--- mraptor Output ---\n");
+            Console.WriteLine(contentAnalysis.fullmraptorOutput);
+            Console.WriteLine("\n--- olevba Output ---\n");
+            Console.WriteLine(contentAnalysis.fullolevbaOutput);
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
         }
 
         private static void HelpMessage()
@@ -155,7 +146,7 @@ namespace olescan
                     "\n-o, --output       output scanning results into a comma delimited file (e.g. -o \"C:\\results.csv\")" +
                     "\n-v, --verbose      output the verbose analysis to console" +
                     "\n\n" +
-                    "Example Usage: olescan -q -b -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
+                    "Example Usage: olescan -v -b -o \"C:\\Results.csv\" \"C:\\DocumentList.csv\"");
         }
 
     }

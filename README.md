@@ -46,7 +46,7 @@ Options:
 
       -o, --output       output scanning results into a delimited text file (e.g. -o "C:\results.csv")
 
-	  -v, --verbose		 output the verbose analysis to console
+	  -v, --verbose		output the verbose analysis to console
 
 
-Example Usage: olescan -q -b -o "C:\Results.csv" "C:\DocumentList.csv"
+Example Usage: olescan -v -b -o "C:\Results.csv" "C:\DocumentList.csv"
