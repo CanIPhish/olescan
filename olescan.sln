@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "olescan", "oletriage\olescan.csproj", "{49582EB4-306D-4B12-85B1-A977944B360C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{41C1DB92-C0FE-4367-ADF6-F7441F8BC480}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{777FC317-7793-4542-BC9C-172A151D4761}"
 	ProjectSection(SolutionItems) = preProject
 		oletriage\bin\Debug\CommandLine.dll = oletriage\bin\Debug\CommandLine.dll
 		oletriage\bin\Debug\CommandLine.xml = oletriage\bin\Debug\CommandLine.xml
