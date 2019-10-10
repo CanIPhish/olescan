@@ -132,11 +132,11 @@ namespace olescan
                     "Analysis Result: olescan will provide a suspicion rating between 0 - 100 %\n\n" +
                     "Key:\n" +
                     "0 - 15 % - RARE\n" +
-                    "16 - 39 % - UNLIKELY\n" +
-                    "40 - 60 % - POSSIBLE\n" +
-                    "61 - 84 % - LIKELY\n" +
+                    "16 - 40 % - UNLIKELY\n" +
+                    "41 - 59 % - POSSIBLE\n" +
+                    "60 - 84 % - LIKELY\n" +
                     "85 - 100 % - ALMOST CERTAIN\n" +
-                    "It's recommended that anything rated above 15% be investigated further. Please see \n" +
+                    "It's recommended that anything rated above 40% be investigated further. Please see \n" +
                     "(https://github.com/decalage2/oletools) and/or (https://github.com/decalage2/ViperMonkey) \n" +
                     "for extremely useful analysis tools.\n\n" +
                     "\nUsage: olescan [Options] <filename>" +

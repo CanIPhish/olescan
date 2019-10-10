@@ -24,16 +24,16 @@ Key:
 
 	0-15% - RARE
 
-	16-39% - UNLIKELY
+	16-40% - UNLIKELY
 
-	40-60% - POSSIBLE
+	41-59% - POSSIBLE
 
-	61-84% - LIKELY
+	60-84% - LIKELY
 
 	85-100% - ALMOST CERTAIN
 
 
-It's recommended that anything above 15% be investigated further. Please see (https://github.com/decalage2/oletools) 
+It's recommended that anything above 40% be investigated further. Please see (https://github.com/decalage2/oletools) 
 and/or (https://github.com/decalage2/ViperMonkey) for extremely useful analysis tools.
 
 Usage: olescan [Options] \<filename>
