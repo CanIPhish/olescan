@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{777FC317
 		oletriage\bin\Debug\CommandLine.xml = oletriage\bin\Debug\CommandLine.xml
 		oletriage\bin\Debug\CsvHelper.dll = oletriage\bin\Debug\CsvHelper.dll
 		oletriage\bin\Debug\CsvHelper.xml = oletriage\bin\Debug\CsvHelper.xml
+		oletriage\bin\Debug\Debug.zip = oletriage\bin\Debug\Debug.zip
 		oletriage\bin\Debug\olescan.exe = oletriage\bin\Debug\olescan.exe
 		oletriage\bin\Debug\olescan.exe.config = oletriage\bin\Debug\olescan.exe.config
 		oletriage\bin\Debug\olescan.pdb = oletriage\bin\Debug\olescan.pdb

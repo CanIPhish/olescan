@@ -38,7 +38,8 @@ namespace olescan
 
                 process.WaitForExit();
                 ParseoleidOutput(output);
-                return oleFormat;
+                //return oleFormat; ##TEMPORARY DISABLEMENT
+                return true;
             }
         }
 
