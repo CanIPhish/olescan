@@ -10,7 +10,7 @@ It's analysis capabilities include:
       file encryption (oleid)
    2. Automatic code extraction, VBA stomping detection, decoding of common obfuscation
       methods including Hex encoding, StrReverse, Base64, Dridex, VBA expressions, and
-      identification of IOCs from decoded strings (olvevba)
+      identification of IOCs and suspicious VBA keywords from decoded strings (olvevba)
    3. Scanning and detection of malicious VBA Macros using generic heuristics to check for
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 

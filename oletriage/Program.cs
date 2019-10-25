@@ -126,7 +126,7 @@ namespace olescan
                     "   file encryption (oleid)\n" +
                     "2. Automatic code extraction, VBA stomping detection, decoding of common obfuscation \n" +
                     "   methods including Hex encoding, StrReverse, Base64, Dridex, VBA expressions, and \n" +
-                    "   identification of IOCs from decoded strings (olvevba)\n" +
+                    "   identification of IOCs and suspicious VBA keywords from decoded strings (olvevba)\n" +
                     "3. Scanning and detection of malicious VBA Macros using generic heuristics to check for \n" +
                     "   auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)\n\n" +
                     "Analysis Result: olescan will provide a suspicion rating between 0 - 100 %\n\n" +
