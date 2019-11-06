@@ -33,8 +33,7 @@ Key:
 	85-100% - ALMOST CERTAIN
 
 
-It's recommended that anything above 40% be investigated further. Please see (https://github.com/decalage2/oletools) 
-and/or (https://github.com/decalage2/ViperMonkey) for extremely useful analysis tools.
+Please see (https://github.com/decalage2/oletools) and/or (https://github.com/decalage2/ViperMonkey) for extremely useful analysis tools.
 
 Usage: olescan [Options] \<filename>
 

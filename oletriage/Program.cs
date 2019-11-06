@@ -136,8 +136,7 @@ namespace olescan
                     "41 - 59 % - POSSIBLE\n" +
                     "60 - 84 % - LIKELY\n" +
                     "85 - 100 % - ALMOST CERTAIN\n" +
-                    "It's recommended that anything rated above 40% be investigated further. Please see \n" +
-                    "(https://github.com/decalage2/oletools) and/or (https://github.com/decalage2/ViperMonkey) \n" +
+                    "Please see (https://github.com/decalage2/oletools) and/or (https://github.com/decalage2/ViperMonkey) \n" +
                     "for extremely useful analysis tools.\n\n" +
                     "\nUsage: olescan [Options] <filename>" +
                     "\nOptions:" +
