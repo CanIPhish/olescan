@@ -18,6 +18,8 @@ Setup:
 Requires a Windows OS and installation of the oletools utility. Please see https://github.com/decalage2/oletools/wiki/Install. 
 Tested on Windows 10 using olevba 0.54.2/0.55.dev3 on Python 3.7.4
 
+Pre-compiled binaries can be found under https://github.com/Rices/olescan/tree/master/oletriage/bin/Debug
+
 Analysis Result: olescan will provide a suspicion rating between 0-100%
 
 Key:
