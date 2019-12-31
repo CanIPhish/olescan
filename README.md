@@ -15,8 +15,7 @@ It's analysis capabilities include:
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 
 Setup:
-Requires a Windows OS and installation of the oletools utility. Please see https://github.com/decalage2/oletools/wiki/Install. 
-Tested on Windows 10 using olevba 0.54.2/0.55.dev3 on Python 3.7.4
+Requires a Windows OS and installation of the oletools utility. Please see https://github.com/Rices/olescan/wiki for an overview of manual setup, along with a Dockerfile for building of a local olescan image.
 
 Pre-compiled binaries can be found under https://github.com/Rices/olescan/tree/master/oletriage/bin/Debug
 
