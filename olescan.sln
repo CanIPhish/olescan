@@ -19,6 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{777FC317
 		oletriage\bin\Debug\System.ValueTuple.xml = oletriage\bin\Debug\System.ValueTuple.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{C48BC084-4ACA-4AC1-96F6-B3A4596C57FE}"
+	ProjectSection(SolutionItems) = preProject
+		oletriage\Docker\Dockerfile = oletriage\Docker\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
