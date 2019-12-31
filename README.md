@@ -14,7 +14,7 @@ It's analysis capabilities include:
    3. Scanning and detection of malicious VBA Macros using generic heuristics to check for
       auto - execution, system / memory writes and / or file execution outside the VBA context (mraptor)
 
-Setup:
+Setup:<br/>
 Requires a Windows OS and installation of the oletools utility. Please see https://github.com/Rices/olescan/wiki for an overview of manual setup, along with a Dockerfile for building of a local olescan image.
 
 Pre-compiled binaries can be found under https://github.com/Rices/olescan/tree/master/oletriage/bin/Debug
@@ -49,4 +49,7 @@ Options:
 	  -v, --verbose		output the verbose analysis to console
 
 
-Example Usage: olescan -v -b -o "C:\Results.csv" "C:\DocumentList.csv"
+Example Usage: <br/>
+`olescan "MaliciousDoc.xls"`					<-- Basic Analysis Result<br/>
+`olescan -v "MaliciousDoc.xls"`					<-- Verbose Analysis Output (Results of olevba & mraptor)<br/>
+`olescan -v -b -o "C:\Results.csv" "C:\DocumentList.csv"`	<-- Verbose Analysis Output from a batch scan of documents is saved to Results.csv
